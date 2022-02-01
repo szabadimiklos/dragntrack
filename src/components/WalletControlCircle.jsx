@@ -28,11 +28,11 @@ const Circle = styled.div`
 		}};
 `
 
-const WalletControlCircle = ({ type }) => {
+const WalletControlCircle = ({ type, text }) => {
 	return (
 		<>
 			<Circle type={type}>
-				Add Income
+				{text}
 			</Circle>
 		</>
 	)

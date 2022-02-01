@@ -7,24 +7,21 @@ const WalletControlCore = () => {
 			<Box sx={{ border: '1px solid grey' }}>
 				<Box>
 					<div>Incomes</div>
-					<WalletControlCircle type="income"/>
-					<WalletControlCircle type="income"/>
-					<WalletControlCircle type="income"/>
+					{[...Array(3)].map((item, index) =>
+						<WalletControlCircle type="income" key={`income_${index}`} text="Income"/>
+					)}
 				</Box>
 				<Box>
 					<div>Wallets</div>
-					<WalletControlCircle type="wallet"/>
-					<WalletControlCircle type="wallet"/>
-					<WalletControlCircle type="wallet"/>
+					{[...Array(5)].map((item, index) =>
+						<WalletControlCircle type="wallet" key={`wallet_${index}`} text="Wallet"/>
+					)}
 				</Box>
 				<Box>
 					<div>Expenses</div>
-					<WalletControlCircle type="expense"/>
-					<WalletControlCircle type="expense"/>
-					<WalletControlCircle type="expense"/>
-					<WalletControlCircle type="expense"/>
-					<WalletControlCircle type="expense"/>
-					<WalletControlCircle type="expense"/>
+					{[...Array(10)].map((item, index) =>
+						<WalletControlCircle type="expense" key={`expense_${index}`} text="Expense"/>
+					)}
 				</Box>
 			</Box>
 		</>
