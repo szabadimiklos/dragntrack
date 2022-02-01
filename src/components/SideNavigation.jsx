@@ -44,7 +44,7 @@ const Navigation = () => {
 				</IconButton>
 			</Box>
 
-			<Box sx={{ width: '100%', width: 300, bgcolor: 'background.paper' }}>
+			<Box sx={{ width: '100%', width: 250, bgcolor: 'background.paper' }}>
 				<nav aria-label="main menu">
 					<List subheader={
 						<ListSubheader component="div" id="main-menu">

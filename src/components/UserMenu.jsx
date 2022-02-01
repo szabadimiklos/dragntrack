@@ -20,7 +20,7 @@ const userMenuList = [
 	{
 		title: 'Wallet Control',
 		icon: <AddCircleOutlineOutlinedIcon />,
-		to: '/overview'
+		to: '/walletcontrol'
 	},
 	{
 		title: 'Overview',

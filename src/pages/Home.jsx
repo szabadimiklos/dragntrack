@@ -16,21 +16,29 @@ import {
 	Fade,
 	Grid,
 	IconButton,
+	List,
+	ListItem,
+	ListItemButton,
 	ListItemIcon,
 	ListItemText,
 	Menu,
 	MenuItem,
-	Paper,
 	Toolbar,
 	Typography,
 	Zoom,
 } from "@mui/material"
 
+import { grey } from '@mui/material/colors'
+
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import ContactlessOutlinedIcon from '@mui/icons-material/ContactlessOutlined'
 import MenuIcon from '@mui/icons-material/Menu'
+import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlined';
+import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
+
 
 import goalimage from '../assets/images/tesla.jpg'
+
 
 const mainMenuList = [
 	{
@@ -406,8 +414,8 @@ const Home = () => {
 			</Box>
 
 			<Box>
-				<Container fixed>
-					<Box mt={15}>
+				<Box py={10}>
+					<Container fixed>
 						<Grid container spacing={4} alignItems="center">
 							<Grid item md={5}>
 								<Typography variant="h3" gutterBottom>
@@ -421,9 +429,11 @@ const Home = () => {
 								<Chart type="area" width={'100%'} height={'100%'} style={{ minHeight: '350px' }} options={demochart.options} series={demochart.series} />
 							</Grid>
 						</Grid>
-					</Box>
+					</Container>
+				</Box>
 
-					<Box mt={15}>
+				<Box py={10} sx={{ bgcolor: grey[50] }}>
+					<Container fixed>
 						<Grid container spacing={4} alignItems="center">
 							<Grid item md={7}>
 								<Chart type="bar" width={'100%'} height={'100%'} style={{ minHeight: '350px' }} options={demochart2.options} series={demochart2.series} />
@@ -437,9 +447,11 @@ const Home = () => {
 								</Typography>
 							</Grid>
 						</Grid>
-					</Box>
+					</Container>
+				</Box>
 
-					<Box mt={15} mb={15}>
+				<Box py={10}>
+					<Container fixed>
 						<Grid container spacing={4} alignItems="center">
 							<Grid item md={7}>
 								<Typography variant="h3" gutterBottom>
@@ -474,7 +486,69 @@ const Home = () => {
 								</Card>
 							</Grid>
 						</Grid>
-					</Box>
+					</Container>
+				</Box>
+
+				<Box py={10} sx={{ bgcolor: grey[50] }}>
+					<Container fixed>
+						<Grid container spacing={4} alignItems="center">
+							<Grid item md={12}>
+								<Typography variant="h3" gutterBottom>
+									About Us
+								</Typography>
+								<Typography variant="h5">
+									We are a group of determined developers who aim to deliver high quality, useful, interactive and easy-to-use applications, and constantly expanding our knowledge in the process
+								</Typography>
+							</Grid>
+						</Grid>
+					</Container>
+				</Box>
+			</Box>
+
+			<Divider/>
+
+			<Box py={10} sx={{ bgcolor: grey[100] }}>
+				<Container fixed>
+					<Grid container spacing={4} alignItems="center">
+						<Grid item md={5}>
+							<Typography variant="h3">
+								Drag&Track
+							</Typography>
+							<Typography variant="body2">
+								V0.1 beta
+							</Typography>
+						</Grid>
+						<Grid item md={4}>
+							<Typography variant="h5" gutterBottom>Contact Us</Typography>
+
+							<Button variant="outlined" fullWidth startIcon={<AlternateEmailOutlinedIcon />} sx={{ mb: 1}}>
+								info@dragntrack.com
+							</Button>
+
+							<Button variant="outlined" fullWidth startIcon={<CallOutlinedIcon />}>
+								+36 1 456 7890
+							</Button>
+						</Grid>
+						<Grid item md={3}>
+							<List>
+								<ListItem disablePadding>
+									<ListItemButton>
+										<ListItemText primary="About"/>
+									</ListItemButton>
+								</ListItem>
+								<ListItem disablePadding>
+									<ListItemButton>
+										<ListItemText primary="Terms of Use"/>
+									</ListItemButton>
+								</ListItem>
+								<ListItem disablePadding>
+									<ListItemButton>
+										<ListItemText primary="Privacy Policy"/>
+									</ListItemButton>
+								</ListItem>
+							</List>
+						</Grid>
+					</Grid>
 				</Container>
 			</Box>
 		</>
