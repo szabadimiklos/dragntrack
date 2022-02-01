@@ -441,7 +441,7 @@ const Home = () => {
 
 					<Box mt={15} mb={15}>
 						<Grid container spacing={4} alignItems="center">
-							<Grid item md={6}>
+							<Grid item md={7}>
 								<Typography variant="h3" gutterBottom>
 									Set & Achieve Goals
 								</Typography>
@@ -449,7 +449,7 @@ const Home = () => {
 									Are you a man of achievements? With <strong>Drag&Track</strong> it takes just a few seconds to set short or long term goals to keep you motivated
 								</Typography>
 							</Grid>
-							<Grid item md={6}>
+							<Grid item md={5}>
 								<Card>
 									<CardMedia
 										component="img"

@@ -10,22 +10,31 @@ import {
 	MenuItem,
 	Tooltip,
 } from '@mui/material';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
+
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 const userMenuList = [
 	{
+		title: 'Wallet Control',
+		icon: <AddCircleOutlineOutlinedIcon />,
+		to: '/overview'
+	},
+	{
 		title: 'Overview',
-		icon: <HomeOutlinedIcon />,
+		icon: <DashboardOutlinedIcon />,
 		to: '/overview'
 	},
 	{
 		title: 'Settings',
-		icon: <HomeOutlinedIcon />,
+		icon: <SettingsOutlinedIcon />,
 		to: '/settings'
 	},
 	{
 		title: 'Logout',
-		icon: <HomeOutlinedIcon />,
+		icon: <LogoutOutlinedIcon />,
 		to: '/'
 	},
 ]
