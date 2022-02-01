@@ -1,33 +1,46 @@
 import { Box } from "@mui/material"
 import WalletControlCircle from "./WalletControlCircle";
 
+import { DndProvider } from "react-dnd";
+import { TouchBackend } from "react-dnd-touch-backend"
+
+const dndoptions = {
+	enableMouseEvents: true,
+	delayTouchStart: 200
+}
+
 const WalletControlCore = () => {
 	return (
-		<>
+		<DndProvider backend={TouchBackend} options={dndoptions}>
 			<Box sx={{ border: '1px solid grey' }}>
 				<Box>
 					<div>Incomes</div>
-					<WalletControlCircle type="income"/>
-					<WalletControlCircle type="income"/>
-					<WalletControlCircle type="income"/>
+					<Box sx={{ display: 'flex', alignItems: 'center' }}>
+						<WalletControlCircle type="income" text="Income"/>
+						<WalletControlCircle type="income" text="Paycheck"/>
+					</Box>
 				</Box>
 				<Box>
 					<div>Wallets</div>
-					<WalletControlCircle type="wallet"/>
-					<WalletControlCircle type="wallet"/>
-					<WalletControlCircle type="wallet"/>
+					<Box sx={{ display: 'flex', alignItems: 'center' }}>
+						<WalletControlCircle type="wallet" text="Cash"/>
+						<WalletControlCircle type="wallet" text="OTP bank account"/>
+						<WalletControlCircle type="wallet" text="Raiffeisen bank account"/>
+					</Box>
 				</Box>
 				<Box>
 					<div>Expenses</div>
-					<WalletControlCircle type="expense"/>
-					<WalletControlCircle type="expense"/>
-					<WalletControlCircle type="expense"/>
-					<WalletControlCircle type="expense"/>
-					<WalletControlCircle type="expense"/>
-					<WalletControlCircle type="expense"/>
+					<Box sx={{ display: 'flex', alignItems: 'center' }}>
+						<WalletControlCircle type="expense" text="Income"/>
+						<WalletControlCircle type="expense" text="Income"/>
+						<WalletControlCircle type="expense" text="Income"/>
+						<WalletControlCircle type="expense" text="Income"/>
+						<WalletControlCircle type="expense" text="Income"/>
+						<WalletControlCircle type="expense" text="Income"/>
+					</Box>
 				</Box>
 			</Box>
-		</>
+		</DndProvider>
 	)
 }
 
