@@ -3,10 +3,11 @@ import WalletControlCircle from "./WalletControlCircle";
 
 import { DndProvider } from "react-dnd";
 import { TouchBackend } from "react-dnd-touch-backend"
+import { HTML5Backend } from "react-dnd-html5-backend"
 
 const dndoptions = {
 	enableMouseEvents: true,
-	delayTouchStart: 200
+	delayTouchStart: 0
 }
 
 const WalletControlCore = () => {

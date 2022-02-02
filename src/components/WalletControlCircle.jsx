@@ -59,7 +59,6 @@ const WalletControlCircle = ({ type, text }) => {
 				return ''
 		}
 	}
-
 	const accept = acceptable(type)
 
 	const [{ canDrop, isOver }, drop] = useDrop(() => ({
