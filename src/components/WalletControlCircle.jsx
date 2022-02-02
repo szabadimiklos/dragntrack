@@ -14,16 +14,12 @@ const Circle = styled.div`
 			switch (props.type) {
 				case 'income':
 					return 'green'
-					break;	
 				case 'wallet':
 					return 'blue'
-					break;
 				case 'expense':
 					return 'red'
-					break;
 				default:
 					return 'gray'
-					break;
 			}
 		}};
 `
