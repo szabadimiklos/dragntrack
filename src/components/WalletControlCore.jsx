@@ -4,23 +4,18 @@ import {
 	MouseSensor,
 	TouchSensor,
 	useSensor,
-	useSensors
+	useSensors,
+	DragOverlay
 } from "@dnd-kit/core";
 
 import { Box } from "@mui/material"
 import WalletControlCircle from "./WalletControlCircle";
 import styled from '@emotion/styled'
 
-const DroppableTest = styled.div`
-	width: 100%;
-	height: 300px;
-	border: 2px solid black;
-`
-
-const MComponent = () => {
+const MonitorDndEvents = () => {
 	// Monitor drag and drop events that happen on the parent `DndContext` provider
 	useDndMonitor({
-		//onDragStart(event) { console.log("onDragStart",event) },
+		onDragStart(event) { console.log("onDragStart",event) },
 		//onDragMove(event) { console.log("onDragMove",event) },
 		onDragOver(event) { console.log("onDragOver Currently over",event.over) },
 		onDragEnd(event) {console.log("onDragEnd Ended over",event.over) },
@@ -41,7 +36,6 @@ const WalletControlCore = () => {
 
 	return (
 		<DndContext sensors={sensors}>
-			<MComponent />
 			<Box sx={{ border: '1px solid grey' }}>
 				<Box>
 					<div>Incomes</div>
@@ -62,6 +56,8 @@ const WalletControlCore = () => {
 					)}
 				</Box>
 			</Box>
+
+			<MonitorDndEvents />
 		</DndContext>
 	)
 }

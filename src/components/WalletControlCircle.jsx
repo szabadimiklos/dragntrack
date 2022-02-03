@@ -2,6 +2,11 @@ import styled from '@emotion/styled'
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
+const CircleDnDWrapper = styled.div`
+	border-radius: 50%;
+	margin: 5px;
+	display: inline-block;
+`
 const Circle = styled.div`
 	border-radius: 50%;
 	width: 90px;
@@ -10,6 +15,7 @@ const Circle = styled.div`
 	justify-content: center;
 	align-items: center;
 	cursor: grab;
+	transition: all 0.25s;
 
 	background-color: 
 		${props => {
@@ -30,6 +36,8 @@ const DraggablePart = styled.div`
 `
 const DroppablePart = styled.div`
 	display: inline-block;
+	background-color: rgba(100,100,100,0.25);
+	border-radius: 50%;
 `
 
 const WalletControlCircle = ({ type, text, ukey }) => {
@@ -57,8 +65,11 @@ const WalletControlCircle = ({ type, text, ukey }) => {
 			},
 		});
 		const droppableStyle = {
-			backgroundColor: isOver ? 'yellow' : undefined,
+			backgroundColor: isOver ? undefined : undefined,
 		};
+		const dynStyle = {
+			backgroundColor: isOver ? 'yellow' : undefined,
+		}
 
 	/* Draggable part */
 		const { attributes, listeners, setNodeRef:draggableNodeRef, transform } = useDraggable({
@@ -69,17 +80,21 @@ const WalletControlCircle = ({ type, text, ukey }) => {
 		});
 		const draggableStyle = transform ? {
 			transform: CSS.Translate.toString(transform),
-		} : undefined;
+		} : {
+			transition: 'all 0.5s',
+		};
 
 	return (
 		<>
-			<DroppablePart ref={droppableNodeRef} style={droppableStyle}>
-				<DraggablePart ref={draggableNodeRef} {...listeners} {...attributes} style={draggableStyle}>
-					<Circle type={type}>
-						{text}
-					</Circle>
-				</DraggablePart>
-			</DroppablePart>
+			<CircleDnDWrapper>
+				<DroppablePart ref={droppableNodeRef} style={droppableStyle}>
+					<DraggablePart ref={draggableNodeRef} {...listeners} {...attributes} style={draggableStyle}>
+						<Circle type={type} style={dynStyle}>
+							{text}
+						</Circle>
+					</DraggablePart>
+				</DroppablePart>
+			</CircleDnDWrapper>
 		</>
 	)
 }
