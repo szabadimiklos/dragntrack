@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const CircleDnDWrapper = styled.div`
 	border-radius: 50%;
@@ -9,12 +9,16 @@ const CircleDnDWrapper = styled.div`
 	display: inline-block;
 `
 const Circle = styled.div`
+	position: relative;
+	width: 100px;
+	height: 100px;
 	border-radius: 50%;
-	width: 90px;
-	height: 90px;
+
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
+
+	overflow: hidden;
 	cursor: grab;
 	transition: all 0.25s;
 	color: white;
@@ -32,6 +36,18 @@ const Circle = styled.div`
 					return 'rgba(200,200,200,1.0)'
 			}
 		}};
+
+	&:after{
+		content: '';
+		display: block;
+		position: absolute;
+		top: 10%;
+		left: 5%;
+		width: 125%;
+		height: 125%;
+		border-radius: 50%;
+		background-color: rgba(255,255,255,0.15);
+	}
 `
 const DraggablePart = styled.div`
 	display: inline-block;
@@ -42,9 +58,9 @@ const DroppablePart = styled.div`
 	border-radius: 50%;
 `
 
-const WalletControlCircle = ({ type, text, ukey }) => {
+const WalletControlCircle = ({ ukey, options }) => {
 	let acceptedTypes = []
-	switch (type) {
+	switch (options.type) {
 		case "income":	
 			acceptedTypes = []
 			break;
@@ -64,6 +80,7 @@ const WalletControlCircle = ({ type, text, ukey }) => {
 			id: ukey,
 			data: {
 				accepts: acceptedTypes,
+				options: { ...options }
 			},
 		});
 		const droppableStyle = {
@@ -77,7 +94,8 @@ const WalletControlCircle = ({ type, text, ukey }) => {
 		const { attributes, listeners, setNodeRef:draggableNodeRef, transform } = useDraggable({
 			id: ukey,
 			data: {
-				type: type,
+				type: options.type,
+				options: { ...options }
 			},
 		});
 		const draggableStyle = transform ? {
@@ -93,9 +111,13 @@ const WalletControlCircle = ({ type, text, ukey }) => {
 		<>
 			<CircleDnDWrapper>
 				<DroppablePart ref={droppableNodeRef} style={droppableStyle}>
-					<DraggablePart ref={draggableNodeRef} {...listeners} {...attributes} style={draggableStyle} disabled={type === 'expense' ? true : false}>
-						<Circle type={type} style={dynStyle}>
-							<Typography variant='body1'>{text}</Typography>
+					<DraggablePart ref={draggableNodeRef} {...listeners} {...attributes} style={draggableStyle} disabled={options.type === 'expense' ? true : false}>
+						<Circle type={options.type} style={dynStyle}>
+							<Box sx={{ textAlign: 'center', p: 1 }}>
+								<Typography component="div" variant='body1' sx={{ fontSize: '0.85em', fontWeight: 'bold', lineHeight: '1em' }}>{options.label}</Typography>
+								<Typography variant='body1'>{options.amount !== 0 && options.amount}</Typography>
+								<Typography variant='body2' sx={{ fontSize: '0.65em', fontWeight: 'bold' }}>{options.currency}</Typography>
+							</Box>
 						</Circle>
 					</DraggablePart>
 				</DroppablePart>

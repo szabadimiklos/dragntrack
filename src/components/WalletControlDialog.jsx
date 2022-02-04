@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import FormControl, { useFormControl } from '@mui/material/FormControl';
 
-const WalletControlDialog = () => {
+const WalletControlDialog = ({ transactionData }) => {
 	const { isWCDOpen } = useSelector((state) => state.common)
 	const dispatch = useDispatch()
 
@@ -27,6 +27,9 @@ const WalletControlDialog = () => {
 			>
 				<DialogTitle>Create transaction</DialogTitle>
 				<DialogContent>
+					<DialogContentText>
+						{(transactionData.from && transactionData.to) && `New transaction from ${transactionData.from.data.current.options.label} to ${transactionData.to.data.current.options.label}`}
+					</DialogContentText>
 					<DialogContentText>
 						Please fill in the new transactions' details below.
 					</DialogContentText>
@@ -42,7 +45,14 @@ const WalletControlDialog = () => {
 								id="transaction-amount"
 								label="Transaction Amount"
 								helperText="Use only numbers"
-								defaultValue={0}
+								defaultValue={
+									(transactionData.from && transactionData.to.data.current.options.type !== 'expense')
+										? transactionData.from.data.current.options.amount 
+									: (transactionData.from && transactionData.to.data.current.options.type === 'expense') 
+										? transactionData.to.data.current.options.amount 
+									: 
+										0
+								}
 								margin="normal"
 								required
 							/>

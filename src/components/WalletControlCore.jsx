@@ -1,8 +1,6 @@
 import { useDispatch } from "react-redux";
 import { toggleWalletControlDialog } from '../redux/common';
 
-import styled from '@emotion/styled'
-
 import { 
 	DndContext,
 	useDndMonitor,
@@ -10,16 +8,17 @@ import {
 	TouchSensor,
 	useSensor,
 	useSensors,
-	DragOverlay
 } from "@dnd-kit/core";
 
-import { Box } from "@mui/material"
+import { Box, Divider, Paper } from "@mui/material"
 
 import WalletControlCircle from "./WalletControlCircle";
 import WalletControlDialog from "./WalletControlDialog";
+import { useState } from "react";
 
 
 const WalletControlCore = () => {
+	const [transactionData,setTransactionData] = useState({})
 	const dispatch = useDispatch()
 
 	const MonitorDndEvents = () => {
@@ -35,6 +34,10 @@ const WalletControlCore = () => {
 					event.over.data.current.accepts.includes(event.active.data.current.type)
 				){
 					dispatch(toggleWalletControlDialog(true))
+					setTransactionData({
+						from: event.active,
+						to: event.over
+					})
 				}
 			},
 			//onDragCancel(event) { console.log("onDragCancel",event) },
@@ -50,34 +53,136 @@ const WalletControlCore = () => {
 		touchSensor,
 	);
 
+	const fakeData = {
+		"incomeCircles": [
+			{
+				id: 'i-0',
+				type: 'income',
+				label: 'New Income',
+				amount: 0,
+				currency: 'USD'
+			},
+			{
+				id: 'i-1',
+				type: 'income',
+				label: 'Paycheck',
+				amount: 5000,
+				currency: 'USD'
+			},
+		],
+		"walletCircles": [
+			{
+				id: 'w-0',
+				type: 'wallet',
+				label: 'Cash',
+				amount: 15000,
+				currency: 'USD'
+			},
+			{
+				id: 'w-1',
+				type: 'wallet',
+				label: 'OTP Bank Account',
+				amount: 128344,
+				currency: 'USD'
+			},
+			{
+				id: 'w-2',
+				type: 'wallet',
+				label: 'Raiffeisen Bank Account',
+				amount: 59920,
+				currency: 'USD'
+			},
+		],
+		"expenseCircles": [
+			{
+				id: 'e-0',
+				type: 'expense',
+				label: 'New Expense',
+				amount: 0,
+				currency: 'USD'
+			},
+			{
+				id: 'e-2',
+				type: 'expense',
+				label: 'Rent',
+				amount: 2850,
+				currency: 'USD'
+			},
+			{
+				id: 'e-8',
+				type: 'expense',
+				label: 'Mobile (postpaid)',
+				amount: 50,
+				currency: 'USD'
+			},
+			{
+				id: 'e-1',
+				type: 'expense',
+				label: 'Food',
+				amount: 0,
+				currency: 'USD'
+			},
+			{
+				id: 'e-3',
+				type: 'expense',
+				label: 'Gas',
+				amount: 0,
+				currency: 'USD'
+			},
+			{
+				id: 'e-4',
+				type: 'expense',
+				label: 'Clothes',
+				amount: 0,
+				currency: 'USD'
+			},
+			{
+				id: 'e-5',
+				type: 'expense',
+				label: 'Pet',
+				amount: 0,
+				currency: 'USD'
+			},
+			{
+				id: 'e-6',
+				type: 'expense',
+				label: 'Doctor',
+				amount: 0,
+				currency: 'USD'
+			},
+			{
+				id: 'e-7',
+				type: 'expense',
+				label: 'Household costs',
+				amount: 0,
+				currency: 'USD'
+			},
+		]
+	}
+
 	return (
 		<>
 			<DndContext sensors={sensors} autoScroll={false}>
-				<Box sx={{ border: '1px solid grey' }}>
-					<Box>
-						<div>Incomes</div>
-						{[...Array(3)].map((item, index) =>
-							<WalletControlCircle type="income" key={`income_${index}`} ukey={`income_${index}`} text="Income"/>
+				<Paper elevation={6} sx={{ p: 3 }}>
+					<Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+						{fakeData.incomeCircles.map(item =>
+							<WalletControlCircle key={item.id} ukey={item.id} options={item}/>
+						)}
+						<Divider sx={{ my: 2, flexBasis: '100%' }}/>
+						{fakeData.walletCircles.map(item =>
+							<WalletControlCircle key={item.id} ukey={item.id} options={item}/>
+						)}
+						<Divider sx={{ my: 2, flexBasis: '100%' }}/>
+						{fakeData.expenseCircles.map(item =>
+							<WalletControlCircle key={item.id} ukey={item.id} options={item}/>
 						)}
 					</Box>
-					<Box>
-						<div>Wallets</div>
-						{[...Array(5)].map((item, index) =>
-							<WalletControlCircle type="wallet" key={`wallet_${index}`} ukey={`wallet_${index}`} text="Wallet"/>
-						)}
-					</Box>
-					<Box>
-						<div>Expenses</div>
-						{[...Array(10)].map((item, index) =>
-							<WalletControlCircle type="expense" key={`expense_${index}`} ukey={`expense_${index}`} text="Expense"/>
-						)}
-					</Box>
-				</Box>
+				</Paper>
 
 				<MonitorDndEvents />
 			</DndContext>
 
-			<WalletControlDialog />
+			<WalletControlDialog transactionData={transactionData} />
 		</>
 	)
 }
