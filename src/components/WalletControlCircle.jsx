@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
+import { Typography } from '@mui/material';
 
 const CircleDnDWrapper = styled.div`
 	border-radius: 50%;
@@ -16,18 +17,19 @@ const Circle = styled.div`
 	align-items: center;
 	cursor: grab;
 	transition: all 0.25s;
+	color: white;
 
 	background-color: 
 		${props => {
 			switch (props.type) {
 				case 'income':
-					return 'green'
+					return '#00cf00'
 				case 'wallet':
-					return 'blue'
+					return '#07a3e0'
 				case 'expense':
-					return 'red'
+					return '#ff5100'
 				default:
-					return 'gray'
+					return 'rgba(200,200,200,1.0)'
 			}
 		}};
 `
@@ -59,7 +61,7 @@ const WalletControlCircle = ({ type, text, ukey }) => {
 
 	/* Dropzone part */
 		const { isOver, setNodeRef:droppableNodeRef } = useDroppable({
-			id: ukey+"drop",
+			id: ukey,
 			data: {
 				accepts: acceptedTypes,
 			},
@@ -68,19 +70,22 @@ const WalletControlCircle = ({ type, text, ukey }) => {
 			backgroundColor: isOver ? undefined : undefined,
 		};
 		const dynStyle = {
-			backgroundColor: isOver ? 'yellow' : undefined,
+			transform: isOver ? 'scale(1.15)' : undefined,
 		}
 
 	/* Draggable part */
 		const { attributes, listeners, setNodeRef:draggableNodeRef, transform } = useDraggable({
-			id: ukey+"drag",
+			id: ukey,
 			data: {
 				type: type,
 			},
 		});
 		const draggableStyle = transform ? {
 			transform: CSS.Translate.toString(transform),
+			zIndex: 1,
+			position: 'relative'
 		} : {
+			zIndex: 0,
 			transition: 'all 0.5s',
 		};
 
@@ -88,9 +93,9 @@ const WalletControlCircle = ({ type, text, ukey }) => {
 		<>
 			<CircleDnDWrapper>
 				<DroppablePart ref={droppableNodeRef} style={droppableStyle}>
-					<DraggablePart ref={draggableNodeRef} {...listeners} {...attributes} style={draggableStyle}>
+					<DraggablePart ref={draggableNodeRef} {...listeners} {...attributes} style={draggableStyle} disabled={type === 'expense' ? true : false}>
 						<Circle type={type} style={dynStyle}>
-							{text}
+							<Typography variant='body1'>{text}</Typography>
 						</Circle>
 					</DraggablePart>
 				</DroppablePart>
