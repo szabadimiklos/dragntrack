@@ -8,7 +8,9 @@ const WalletControl = () => {
 		<>
 			<TopNavigation />
 			<SideNavigation />
-			<div>WalletControl page</div>
+			<div>
+				WalletControl page
+			</div>
 
 
 			<Container fixed>
