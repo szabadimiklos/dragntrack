@@ -92,6 +92,13 @@ const WalletControlCore = () => {
 				amount: 59920,
 				currency: 'USD'
 			},
+			{
+				id: 'w-3',
+				type: 'wallet',
+				label: 'Wall Safe (cash)',
+				amount: 11500,
+				currency: 'USD'
+			},
 		],
 		"expenseCircles": [
 			{
@@ -102,56 +109,77 @@ const WalletControlCore = () => {
 				currency: 'USD'
 			},
 			{
-				id: 'e-2',
+				id: 'e-1',
 				type: 'expense',
 				label: 'Rent',
 				amount: 2850,
 				currency: 'USD'
 			},
 			{
-				id: 'e-8',
+				id: 'e-2',
 				type: 'expense',
 				label: 'Mobile (postpaid)',
 				amount: 50,
 				currency: 'USD'
 			},
 			{
-				id: 'e-1',
+				id: 'e-3',
+				type: 'expense',
+				label: 'Internet (home)',
+				amount: 45,
+				currency: 'USD'
+			},
+			{
+				id: 'e-4',
 				type: 'expense',
 				label: 'Food',
 				amount: 0,
 				currency: 'USD'
 			},
 			{
-				id: 'e-3',
+				id: 'e-5',
 				type: 'expense',
 				label: 'Gas',
 				amount: 0,
 				currency: 'USD'
 			},
 			{
-				id: 'e-4',
+				id: 'e-6',
+				type: 'expense',
+				label: 'Travel',
+				amount: 0,
+				currency: 'USD'
+			},
+			{
+				id: 'e-7',
+				type: 'expense',
+				label: 'Car & Service',
+				amount: 0,
+				currency: 'USD'
+			},
+			{
+				id: 'e-8',
 				type: 'expense',
 				label: 'Clothes',
 				amount: 0,
 				currency: 'USD'
 			},
 			{
-				id: 'e-5',
+				id: 'e-9',
 				type: 'expense',
 				label: 'Pet',
 				amount: 0,
 				currency: 'USD'
 			},
 			{
-				id: 'e-6',
+				id: 'e-10',
 				type: 'expense',
 				label: 'Doctor',
 				amount: 0,
 				currency: 'USD'
 			},
 			{
-				id: 'e-7',
+				id: 'e-11',
 				type: 'expense',
 				label: 'Household costs',
 				amount: 0,
@@ -164,7 +192,7 @@ const WalletControlCore = () => {
 		<>
 			<DndContext sensors={sensors} autoScroll={false}>
 				<Paper elevation={6} sx={{ p: 3 }}>
-					<Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+					<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 						{fakeData.incomeCircles.map(item =>
 							<WalletControlCircle key={item.id} ukey={item.id} options={item}/>
 						)}

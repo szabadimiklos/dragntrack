@@ -13,6 +13,8 @@ const Circle = styled.div`
 	width: 100px;
 	height: 100px;
 	border-radius: 50%;
+	padding: 5px;
+	box-sizing: border-box;
 
 	display: inline-flex;
 	justify-content: center;
@@ -114,8 +116,8 @@ const WalletControlCircle = ({ ukey, options }) => {
 					<DraggablePart ref={draggableNodeRef} {...listeners} {...attributes} style={draggableStyle} disabled={options.type === 'expense' ? true : false}>
 						<Circle type={options.type} style={dynStyle}>
 							<Box sx={{ textAlign: 'center', p: 1 }}>
-								<Typography component="div" variant='body1' sx={{ fontSize: '0.85em', fontWeight: 'bold', lineHeight: '1em' }}>{options.label}</Typography>
-								<Typography variant='body1'>{options.amount !== 0 && options.amount}</Typography>
+								<Typography component="div" variant='body1' sx={{ fontSize: '0.75em', fontWeight: 'bold', lineHeight: '1em' }}>{options.label}</Typography>
+								<Typography variant='body1' sx={{ background: 'rgba(255,255,255,0.25)', p: "2px", borderRadius: 1 }}>{options.amount !== 0 && options.amount}</Typography>
 								<Typography variant='body2' sx={{ fontSize: '0.65em', fontWeight: 'bold' }}>{options.currency}</Typography>
 							</Box>
 						</Circle>
