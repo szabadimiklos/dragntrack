@@ -10,7 +10,7 @@ const WalletControl = () => {
 			<SideNavigation />
 
 			<Container fixed>
-				<Typography variant="h3" sx={{ py: 5 }}>Wallet Control</Typography>
+				<Typography variant="h3" sx={{ py: 6 }}>Wallet Control</Typography>
 				<WalletControlCore />
 			</Container>
 		</>
