@@ -190,7 +190,7 @@ const WalletControlCore = () => {
 
 	return (
 		<>
-			<DndContext sensors={sensors} autoScroll={false}>
+			<DndContext sensors={sensors} autoScroll={true}>
 				<Paper elevation={6} sx={{ p: 3 }}>
 					<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 						{fakeData.incomeCircles.map(item =>
