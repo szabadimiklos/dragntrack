@@ -53,6 +53,7 @@ const Circle = styled.div`
 `
 const DraggablePart = styled.div`
 	display: inline-block;
+	visibility: visible;
 `
 const DroppablePart = styled.div`
 	display: inline-block;
@@ -62,19 +63,22 @@ const DroppablePart = styled.div`
 
 const WalletControlCircle = ({ ukey, options }) => {
 	let acceptedTypes = []
-	switch (options.type) {
-		case "income":	
-			acceptedTypes = []
-			break;
-		case "wallet":
-			acceptedTypes = ['wallet','income']
-			break;
-		case "expense":
-			acceptedTypes = ['wallet']
-			break;
-		default:
-			acceptedTypes = []
-			break;
+	if (options.type !== 'undefined') {
+
+		switch (options.type) {
+			case "income":	
+				acceptedTypes = []
+				break;
+			case "wallet":
+				acceptedTypes = ['wallet','income']
+				break;
+			case "expense":
+				acceptedTypes = ['wallet']
+				break;
+			default:
+				acceptedTypes = []
+				break;
+		}
 	}
 
 	/* Dropzone part */
@@ -93,20 +97,17 @@ const WalletControlCircle = ({ ukey, options }) => {
 		}
 
 	/* Draggable part */
-		const { attributes, listeners, setNodeRef:draggableNodeRef, transform } = useDraggable({
+		const { attributes, listeners, isDragging, setNodeRef:draggableNodeRef, transform } = useDraggable({
 			id: ukey,
 			data: {
 				type: options.type,
 				options: { ...options }
 			},
 		});
-		const draggableStyle = transform ? {
-			transform: CSS.Translate.toString(transform),
-			zIndex: 1,
-			position: 'relative'
+		const draggableStyle = isDragging ? {
+			opacity: 0
 		} : {
-			zIndex: 0,
-			transition: 'all 0.5s',
+			opacity: 1
 		};
 
 	return (

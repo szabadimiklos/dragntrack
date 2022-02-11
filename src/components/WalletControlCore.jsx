@@ -8,6 +8,7 @@ import {
 	TouchSensor,
 	useSensor,
 	useSensors,
+	DragOverlay,
 } from "@dnd-kit/core";
 
 import { Box, Divider, Paper } from "@mui/material"
@@ -19,16 +20,21 @@ import { useState } from "react";
 
 const WalletControlCore = () => {
 	const [transactionData,setTransactionData] = useState({})
+	const [activeData,setActiveData] = useState({})
 	const dispatch = useDispatch()
 
 	const MonitorDndEvents = () => {
 		// Monitor drag and drop events that happen on the parent `DndContext` provider
 		useDndMonitor({
-			//onDragStart(event) { console.log("onDragStart",event) },
+			onDragStart(event) {
+				setActiveData(event.active);
+			},
 			//onDragMove(event) { console.log("onDragMove",event) },
 			//onDragOver(event) { console.log("onDragOver Currently over",event.over) },
 			onDragEnd(event) {
+				setActiveData({data: {current: { options: { type: 'default' } }}});
 				if(!event.over) return;
+
 				if(
 					event.over.id !== event.active.id &&
 					event.over.data.current.accepts.includes(event.active.data.current.type)
@@ -188,6 +194,8 @@ const WalletControlCore = () => {
 		]
 	}
 
+	
+
 	return (
 		<>
 			<DndContext sensors={sensors} autoScroll={true}>
@@ -208,7 +216,16 @@ const WalletControlCore = () => {
 				</Paper>
 
 				<MonitorDndEvents />
+
+				<DragOverlay>
+					{activeData.data ? (
+						<>
+							<WalletControlCircle key={activeData.id} ukey={activeData.id} options={activeData.data.current.options}/>
+						</>
+					) : null }
+				</DragOverlay>
 			</DndContext>
+
 
 			<WalletControlDialog transactionData={transactionData} />
 		</>
